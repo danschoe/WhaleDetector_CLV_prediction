@@ -1,0 +1,51 @@
+### Data parameters
+data_path: ./data
+train_begin: "2018-09-20"
+train_label_begin: "2019-09-15"
+train_end: "2020-03-12"
+test_begin: "2019-03-19"
+test_label_begin: "2020-03-13"
+test_end: "2020-09-08"
+date_aggregation: daily
+group_by_channel_id: False
+# Check if actually used
+log_clv: False
+clv_periods: [6] # in months 
+subset: null
+
+### General training parameters
+batch_size: 64
+num_epochs: 100
+seed: 42
+num_workers: 0
+device: cuda:0
+compile: False
+bfloat_16: False
+
+### Model parameters
+input_channels: 1
+
+# Optimizer parameters
+learning_rate: 1e-3
+weight_decay: null # Paper used Adam optimizer without weight decay
+betas: [0.9, 0.999]
+lr_scheduler: null # Not used in paper: Options are "cosine" and "on_plateau"
+
+### Lr scheduler parameters
+# Shared parameter
+min_lr: 1e-5
+
+# CosineAnnealingLR parameters
+warmup_steps: 1000
+max_iters: null # Set to null to use total training steps
+
+# ReduceLROnPlateau parameters
+factor: 0.1
+lr_patience: 5
+threshold: 0.001
+
+
+### Early stopping parameters
+patience: 10
+min_delta: 0.001
+load_best_model: true
